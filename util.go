@@ -16,3 +16,6 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.WriteHeader(code)
 	w.Write(response)
 }
+
+// curl -H 'Client-ID: hq22yaqr8c24w8ymv4q0vhh9wrxzst' \
+// -X GET 'https://api.twitch.tv/helix/videos?id=172982667
