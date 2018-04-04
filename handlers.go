@@ -30,14 +30,14 @@ func DataRequest(url){
 func VideoByIDHander(w http.ResponseWriter, re *http.Request) {
 	vars := mux.Vars(router)
 	id := vars[videoid] 
-	url= "https://api.twitch.tv/helix/videos?id="+id
+	url:= "https://api.twitch.tv/helix/videos?id="+id
 	DataRequest( url)
 }	
 	
 func UserByIdFunc(w http.ResponseWriter, re *http.Request){
 	vars := mux.Vars(router)
 	id := vars[userid] 
-	url= "https://api.twitch.tv/helix/user?id="+id
+	url:= "https://api.twitch.tv/helix/user?id="+id
 	DataRequest(url)
 }
 
