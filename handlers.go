@@ -24,8 +24,9 @@ func DataRequest(w http.ResponseWriter, url string){
 	
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	
-    bodyString := string(bodyBytes)
-    respondWithJSON(w,http.StatusOK, bodyString)
+    w.Header().Set("Content-Type", "application/json")
+	
+	w.Write(bodyBytes);
 }
 
 func VideoByIdFunc(w http.ResponseWriter, re *http.Request) {
