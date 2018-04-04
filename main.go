@@ -3,6 +3,7 @@ package main
 import (
 "log"
 "net/http"
+"fmt"
 
 "github.com/gorilla/mux"
 "github.com/rs/cors"
@@ -10,7 +11,9 @@ import (
 )
 
 func main() {
-
+	PORT := ":8080"
+	fmt.Println("Initializing Twitch API on port" + PORT)
+	
 	router := mux.NewRouter()
 
 	c := cors.New(cors.Options{
@@ -27,5 +30,5 @@ func main() {
 	
 	handler := c.Handler(router)
 	handler = Logger(handler, "String")
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	log.Fatal(http.ListenAndServe(PORT, handler))
 }
