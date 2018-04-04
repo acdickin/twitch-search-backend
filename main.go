@@ -20,10 +20,10 @@ func main() {
 	})
 	
 	
-	router.HandleFunc("/stream/top", StreamsByIdFunc)
-	router.HandleFunc("/user/{userid}", UserByIdFunc)
-	router.HandleFunc("/game/{gameid}", GameByIdFunc)
-	router.HandleFunc("/video/{videoid}", VideoByIdFunc)
+	router.HandleFunc("/stream/top", StreamsByIdFunc).Methods("GET")
+	router.HandleFunc("/user/{userid}", UserByIdFunc).Methods("GET")
+	router.HandleFunc("/game/{gameid}", GameByIdFunc).Methods("GET")
+	router.HandleFunc("/video/{videoid}", VideoByIdFunc).Methods("GET")
 	
 	handler := c.Handler(router)
 	handler = Logger(handler, "String")

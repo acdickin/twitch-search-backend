@@ -4,11 +4,12 @@ import (
 	"log"
 	"net/http"
 	"io/ioutil"
-
+	
 	"github.com/gorilla/mux"
 )
 	
-func DataRequest(url){
+func DataRequest(w http.ResponseWriter, url string){
+	client := &http.Client{}
 	
 	req, err := http.NewRequest("GET", url, nil)
 
@@ -17,7 +18,7 @@ func DataRequest(url){
 	ErrorHandle(err,"NewRequest")
 
 	resp, err := client.Do(req)
-	ErrorHandle(err,"Response: ")
+	ErrorHandle(err, "Response: ")
 
 	defer resp.Body.Close()
 	
@@ -27,33 +28,35 @@ func DataRequest(url){
     respondWithJSON(w,http.StatusOK, bodyString)
 }
 
-func VideoByIDHander(w http.ResponseWriter, re *http.Request) {
-	vars := mux.Vars(router)
-	id := vars[videoid] 
-	url:= "https://api.twitch.tv/helix/videos?id="+id
-	DataRequest( url)
+func VideoByIdFunc(w http.ResponseWriter, re *http.Request) {
+	vars := mux.Vars(re)
+	id := vars['videoid'] 
+	url:= "https://api.twitch.tv/helix/videos?id=" + id
+	DataRequest(w, url)
 }	
 	
 func UserByIdFunc(w http.ResponseWriter, re *http.Request){
-	vars := mux.Vars(router)
-	id := vars[userid] 
-	url:= "https://api.twitch.tv/helix/user?id="+id
-	DataRequest(url)
+	
+	vars := mux.Vars(re)
+	id := vars['userid'] 
+	url:= "https://api.twitch.tv/helix/user?id=" + id
+	DataRequest(w, url)
 }
 
 func GameByIdFunc(w http.ResponseWriter, re *http.Request){
-	vars := mux.Vars(router)
-	id := vars[gameid] 
-	url:= "https://api.twitch.tv/helix/games?id="+id
-	DataRequest(url)
+	
+	vars := mux.Vars(re)
+	id := vars['gameid'] 
+	url:= "https://api.twitch.tv/helix/games?id=" + id
+	DataRequest(w, url)
 }
 
 func StreamsByIdFunc(w http.ResponseWriter, re *http.Request){
 	url := "https://api.twitch.tv/helix/streams?first=20"
-	DataRequest(url)
+	DataRequest(w, url)
 }
 
-func ErrorHandle(err, errorOn){
+func ErrorHandle(err error , errorOn string){
 	if err != nil{
 		log.Fatal(errorOn, err)
 		return
