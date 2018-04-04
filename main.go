@@ -23,7 +23,7 @@ func main() {
 	router.HandleFunc("/stream/top", StreamsByIdFunc)
 	router.HandleFunc("/user/{userid}", UserByIdFunc)
 	router.HandleFunc("/game/{gameid}", GameByIdFunc)
-	router.HandleFunc("/video/{videoid}", UserByIdFunc)
+	router.HandleFunc("/video/{videoid}", VideoByIdFunc)
 	
 	handler := c.Handler(router)
 	handler = Logger(handler, "String")
