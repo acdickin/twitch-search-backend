@@ -1,9 +1,5 @@
 package main
 
-import(
-
-)
-
 type User struct{
 	created_at	string
 	description	string

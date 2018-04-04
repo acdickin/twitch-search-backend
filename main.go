@@ -18,11 +18,13 @@ func main() {
 		AllowCredentials: true,
 		AllowedMethods:   []string{"POST", "GET", "OPTIONS", "PUT", "DELETE"},
 	})
-
-	//m.HandleFunc("/stream/top", TopStreamHandler)
-	router.HandleFunc("/video/{videoid}", VideoByIDHander)
-	// m.Handle("/user/{userid}", UserByIdFunc)
-	// m.Handle("/game/{gameid}", GameByIdFunc)
+	
+	
+	router.HandleFunc("/stream/top", StreamsByIdFunc)
+	router.HandleFunc("/user/{userid}", UserByIdFunc)
+	router.HandleFunc("/game/{gameid}", GameByIdFunc)
+	router.HandleFunc("/video/{videoid}", UserByIdFunc)
+	
 	handler := c.Handler(router)
 	handler = Logger(handler, "String")
 	log.Fatal(http.ListenAndServe(":8080", handler))
