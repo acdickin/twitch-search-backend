@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	"io/ioutil"
-	
+
 	"github.com/gorilla/mux"
 )
 	
@@ -30,15 +30,14 @@ func DataRequest(w http.ResponseWriter, url string){
 
 func VideoByIdFunc(w http.ResponseWriter, re *http.Request) {
 	vars := mux.Vars(re)
-	id := vars['videoid'] 
+	id := vars["videoid"] 
 	url:= "https://api.twitch.tv/helix/videos?id=" + id
 	DataRequest(w, url)
 }	
 	
 func UserByIdFunc(w http.ResponseWriter, re *http.Request){
-	
 	vars := mux.Vars(re)
-	id := vars['userid'] 
+	id := vars["userid"] 
 	url:= "https://api.twitch.tv/helix/user?id=" + id
 	DataRequest(w, url)
 }
@@ -46,7 +45,7 @@ func UserByIdFunc(w http.ResponseWriter, re *http.Request){
 func GameByIdFunc(w http.ResponseWriter, re *http.Request){
 	
 	vars := mux.Vars(re)
-	id := vars['gameid'] 
+	id := vars["gameid"] 
 	url:= "https://api.twitch.tv/helix/games?id=" + id
 	DataRequest(w, url)
 }
